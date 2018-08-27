@@ -1,25 +1,34 @@
 import React, {Component} from 'react';
+import Form from './addnews/Form';
+import {connect} from 'react-redux';
+import {toggleFormAction} from '../actions';
+import ListItems from './ListItems';
 
 class AddNew extends Component{
+
+    handleToggleForm(e){
+        e.preventDefault();
+        let {dispatch} = this.props;
+        dispatch(toggleFormAction());
+    }
     render() {
+        let control_form = null;
+        if(this.props.toggleForm){
+            control_form = <Form />;
+        }else{
+            control_form = <div className='new-item-header'>
+                <span id="newHeading">New</span>
+                <a href="#newItem" className="pull-right pencil" id="newListItem" onClick={this.handleToggleForm.bind(this)}>&#9783;</a>
+            </div>;
+        }
         return (
             <section className="col-md-4">
                 <div className="panel panel-danger ">
                     <div className="panel-heading">
-                        <form className="form-group" id="newTaskForm">
-                            <div className="input-group" >
-                                <div className="input-group-addon" id="saveNewItem"><a href="">Save</a></div>
-                                <div className="input-group-addon" id="cancel"><a href="">Cancel</a></div>
-                                <input className="form-control" type="text" id="newItemInput" placeholder="New Item"/>
-                            </div>
-                        </form>
-                        <div className='new-item-header'>
-                            <span id="newHeading">New</span>
-                            <a href="#newItem" className="pull-right pencil" id="newListItem">&#9783;</a>
-                        </div>
+                        {control_form}
                     </div>
                     <div className="panel-body">
-                        <ul className="list-group" id='newList'></ul>
+                        <ListItems/>
                     </div>
                 </div>
             </section>
@@ -27,4 +36,8 @@ class AddNew extends Component{
     }
 }
 
-export default AddNew;
+export default connect(function(state){
+    return {
+        toggleForm : state.toggleForm
+    }
+})(AddNew);

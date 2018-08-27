@@ -1,4 +1,4 @@
-body {
+list-groupbody {
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -41,6 +41,7 @@ a:hover {
 .arrow {
 	font-size: 20px;
 	margin-right: 20px;
+
 	transition: 0.5s;
 }
 
