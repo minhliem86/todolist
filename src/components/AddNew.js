@@ -1,26 +1,27 @@
 import React, {Component} from 'react';
 import Form from './addnews/Form';
 import {connect} from 'react-redux';
-import {toggleFormAction} from '../actions';
-import ListItems from './ListItems';
+import {bindActionCreators} from 'redux';
+import ToggleFormAction from '../actions/toggle_form';
+// import ListItems from './ListItems';
 
 class AddNew extends Component{
 
     handleToggleForm(e){
         e.preventDefault();
-        let {dispatch} = this.props;
-        dispatch(toggleFormAction());
     }
     render() {
+        // console.log(this.props.ListToDo);
         let control_form = null;
         if(this.props.toggleForm){
             control_form = <Form />;
         }else{
             control_form = <div className='new-item-header'>
                 <span id="newHeading">New</span>
-                <a href="#newItem" className="pull-right pencil" id="newListItem" onClick={this.handleToggleForm.bind(this)}>&#9783;</a>
+                <a href="#newItem" className="pull-right pencil" id="newListItem" onClick={() => this.props.ToggleFormAction()} >&#9783;</a>
             </div>;
         }
+
         return (
             <section className="col-md-4">
                 <div className="panel panel-danger ">
@@ -28,7 +29,7 @@ class AddNew extends Component{
                         {control_form}
                     </div>
                     <div className="panel-body">
-                        <ListItems/>
+                        {/*<ListItems items={this.props.items}/>*/}
                     </div>
                 </div>
             </section>
@@ -36,8 +37,16 @@ class AddNew extends Component{
     }
 }
 
-export default connect(function(state){
+function mapStateToProps(state){
     return {
-        toggleForm : state.toggleForm
+        toggleForm: state.toggleForm
     }
-})(AddNew);
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({
+        ToggleFormAction
+    }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddNew);

@@ -1,10 +1,10 @@
-const toggleForm = (state = false, action ) => {
+const toggleForm = (state = {toggle: false}, action ) => {
     switch (action.type) {
         case 'TOGGLE_FORM' :
-            return !state;
+            return !state.toggle;
 
         default:
-            return state;
+            return state.toggle;
     }
 }
 

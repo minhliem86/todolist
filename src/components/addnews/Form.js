@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {toggleFormAction} from "../../actions";
 
 class Form extends Component{
-    handleCloseForm(e){
-        e.preventDefault();
-        let {dispatch} = this.props;
-        dispatch(toggleFormAction());
-    }
 
     handleSubmitForm(e){
         e.preventDefault();
@@ -16,12 +10,14 @@ class Form extends Component{
 
     render(){
         return (
-            <form className="form-group" id="newTaskForm" method="POST">
-                <div className="input-group" >
-                    <div className="input-group-addon" id="saveNewItem"><a href="">Save</a></div>
-                    <div className="input-group-addon" id="cancel"><a href="#closeForm" onClick={this.handleCloseForm.bind(this)}>Cancel</a></div>
+            <form className=" clearfix" id="newTaskForm" method="POST">
+                <div className="form-group">
                     <input className="form-control" type="text" id="newItemInput" placeholder="New Item" ref="newList"/>
                 </div>
+                <div className="pull-right">
+                    <button type="submit" className="btn btn-primary">Save</button> <button type="button" className="btn btn-secondary" >Cancel</button>
+                </div>
+
             </form>
         )
     }
@@ -29,6 +25,6 @@ class Form extends Component{
 
 export default connect(function(state){
     return {
-        toggleForm : state.toggleForm
+
     }
 })(Form);

@@ -1,6 +1,6 @@
 const uuidv4 = require('uuid/v4');
 
-const items = [
+const Items = [
     {
         id: uuidv4(),
         name: 'To do List 1'
@@ -11,4 +11,4 @@ const items = [
     }
 ];
 
-export default items;
+export default Items;
