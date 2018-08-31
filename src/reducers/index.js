@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import toggleForm from './toggleForm';
-import ListToDo from './ListToDo';
+import itemReducer from './itemReducer';
+import toggleReducer from './toggleReducer';
 
 const reducer = combineReducers({
-    toggleForm, ListToDo
+    itemReducer: itemReducer, toggleReducer
 });
 
 export default reducer;

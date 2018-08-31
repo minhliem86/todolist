@@ -1,24 +1,25 @@
 import React, {Component} from 'react';
-import Form from './addnews/Form';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import ToggleFormAction from '../actions/toggle_form';
-// import ListItems from './ListItems';
+import {openFormAction, removeItemAction} from '../actions';
+import {ListItems} from '../components/ListItems';
+import Form from './FormAdding';
 
 class AddNew extends Component{
-
-    handleToggleForm(e){
+    handleOpenForm(e){
         e.preventDefault();
+        this.props.openFormAction();
     }
+
     render() {
-        // console.log(this.props.ListToDo);
+        console.log(this.props.items.arr);
         let control_form = null;
-        if(this.props.toggleForm){
-            control_form = <Form />;
+        if(this.props.status.isShow){
+            control_form = <Form  />;
         }else{
             control_form = <div className='new-item-header'>
                 <span id="newHeading">New</span>
-                <a href="#newItem" className="pull-right pencil" id="newListItem" onClick={() => this.props.ToggleFormAction()} >&#9783;</a>
+                <a href="#" className="pull-right pencil" id="newListItem" onClick={this.handleOpenForm.bind(this)} >&#9783;</a>
             </div>;
         }
 
@@ -29,7 +30,7 @@ class AddNew extends Component{
                         {control_form}
                     </div>
                     <div className="panel-body">
-                        {/*<ListItems items={this.props.items}/>*/}
+                        <ListItems items={this.props.items.arr} handleRemoveItem = {() => this.props.removeItemAction()}/>
                     </div>
                 </div>
             </section>
@@ -39,13 +40,15 @@ class AddNew extends Component{
 
 function mapStateToProps(state){
     return {
-        toggleForm: state.toggleForm
+        status: state.toggleReducer,
+        items: state.itemReducer
     }
 }
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
-        ToggleFormAction
+        openFormAction,
+        removeItemAction
     }, dispatch);
 }
 
