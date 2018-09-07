@@ -7,24 +7,20 @@ const itemReducer = (state = {
     switch (action.type) {
         case 'ADD_ITEM' :
             state = {
-                ...state
+                ...state,
+                arr: [...state.arr, action.payload]
             }
+            console.log(action.payload);
             return state;
-            break;
 
         case 'REMOVE_ITEM' :
-            let newArr = remove(state.arr, function(ele){
-                console.log(action.payload);
-                return ele.id == action.payload;
-
-            });
-
             state = {
-                ...state,
-                arr: newArr
+                ...state
             }
+            remove(state.arr, function(ele){
+                return ele.id === action.payload;
+            });
             return state;
-            break;
 
         default:
             return state;

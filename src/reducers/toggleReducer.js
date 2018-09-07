@@ -6,14 +6,16 @@ const toggleReducer = (state = {
             state = {
                 isShow: true,
             };
-            break;
+            return state;
+
         case 'CLOSE_FORM':
             state = {
                 isShow: false,
             }
-            break;
+            return state;
+        default :
+            return state;
     }
-    return state;
 }
 
 export default toggleReducer;

@@ -12,14 +12,14 @@ class AddNew extends Component{
     }
 
     render() {
-        console.log(this.props.items.arr);
+        // console.log(this.props.items.arr);
         let control_form = null;
         if(this.props.status.isShow){
             control_form = <Form  />;
         }else{
             control_form = <div className='new-item-header'>
                 <span id="newHeading">New</span>
-                <a href="#" className="pull-right pencil" id="newListItem" onClick={this.handleOpenForm.bind(this)} >&#9783;</a>
+                <a href="#open" className="pull-right pencil" id="newListItem" onClick={this.handleOpenForm.bind(this)} >&#9783;</a>
             </div>;
         }
 
@@ -30,7 +30,7 @@ class AddNew extends Component{
                         {control_form}
                     </div>
                     <div className="panel-body">
-                        <ListItems items={this.props.items.arr} handleRemoveItem = {() => this.props.removeItemAction()}/>
+                        <ListItems items={this.props.items.arr} handleRemoveItem = {this.props.removeItemAction}/>
                     </div>
                 </div>
             </section>

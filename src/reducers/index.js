@@ -1,9 +1,12 @@
 import {combineReducers} from 'redux';
 import itemReducer from './itemReducer';
 import toggleReducer from './toggleReducer';
+import usersReducer from './users';
 
 const reducer = combineReducers({
-    itemReducer: itemReducer, toggleReducer
+    itemReducer,
+    toggleReducer,
+    usersReducer
 });
 
 export default reducer;

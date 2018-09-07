@@ -10,6 +10,13 @@ export function closeFormAction() {
     }
 }
 
+export function getItemAction(data) {
+    return {
+        type: 'GET_DATA',
+        payload: data,
+    }
+}
+
 export function addItemAction(data){
     return {
         type: 'ADD_ITEM',
@@ -23,5 +30,4 @@ export function removeItemAction(id){
         payload: id,
     }
 }
-
 
