@@ -21,12 +21,11 @@ export function fetchUsers(data) {
 }
 
 /*CREATE USER*/
-
 export function createUser(data){
     return (dispatch) => {
         return HttpClient.post(url,data)
             .then(res => {
-                dispatch(createUserSuccess(res.data))
+                dispatch(createUserSuccess(JSON.parse(res.data.body)))
             })
     }
 }
@@ -38,3 +37,25 @@ export function createUserSuccess(data){
     }
 }
 
+/*REMOVE USER*/
+export function removeUser(id) {
+    return (dispatch) => {
+        return HttpClient.delete(url, id)
+            .then(res => {
+                dispatch(removeUserSuccess(id));
+            })
+            .catch( err => {
+                console.log(err);
+            })
+    }
+}
+
+
+export function removeUserSuccess(id) {
+    return {
+        type: 'REMOVE_USER',
+        payload: id
+    }
+}
+
+/*DIT*/

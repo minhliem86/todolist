@@ -7,6 +7,9 @@ const ListUsers = (props) => {
             return (
                 <li className="list-group-item" key={ele.id}>
                     {ele.name}
+                    <div className="control-wrapper">
+                        <button className="btn btn-warning btn-xs" onClick={() => props.handleEdit(ele.id)} >Edit</button> <button className="btn btn-danger btn-xs" onClick={() => props.handleRemoveUser(ele.id)}>Remove</button>
+                    </div>
                 </li>
             )
         })
